@@ -1,9 +1,11 @@
+import time
+import schedule
 import dns
 import csv
 import argparse
 import subprocess
 def dnsquery(dn):
-	result = subprocess.run(['dig', dn], stdout = subprocess.PIPE)
+	result = subprocess.run(['dig +nocmd +noquestion ANY yahoo.com', dn], stdout = subprocess.PIPE)
 	return result.stdout.decode("UTF-8")
 
 def main():
