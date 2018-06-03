@@ -1,0 +1,1 @@
+Domain Queried,Answer Type,Domain Name Returned,TTL,Unknown,Query Type,IP address

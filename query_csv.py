@@ -2,15 +2,15 @@ import csv
 import subprocess
 import re
 
-with open('top-1m.csv', 'r+') as fr:
-    with open('database.csv', 'w+') as fw:
+with open('domainlist.csv', 'r+') as fr:
+    with open('database2.csv', 'w+') as fw:
         domain = fr.readline()
-        temp = re.findall(r',([\w\.]+)', domain)
-        domain = temp[0]
         writer = csv.writer(fw, quotechar='|', quoting=csv.QUOTE_MINIMAL)
         writer.writerow(['Domain Queried', 'Answer Type', 'Domain Name Returned', 'TTL', 'Unknown', 'Query Type', 'IP address'])
         j = 1
         while (domain):
+            temp = re.findall(r',([\w\.]+)', domain)
+            domain = temp[0]
             result = subprocess.run(['dig', '+nocmd', '+noquestion', 'ANY', domain], stdout = subprocess.PIPE)
             str = result.stdout.decode("UTF-8")
             # pos_answer = findnth(str,"ANSWER", 1)
@@ -46,5 +46,3 @@ with open('top-1m.csv', 'r+') as fr:
                 i += 1
             j += 1
             domain = fr.readline()
-            temp = re.findall(r',([\w\.]+)', domain)
-            domain = temp[0]
